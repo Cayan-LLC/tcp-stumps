@@ -1,2 +1,2 @@
-# stumps-binary
-A PoC of a Stumps-like library designed for binary protocols.
+# TcpStumps
+A PoC of a Stumps-like library designed for simple TCP binary protocols.
