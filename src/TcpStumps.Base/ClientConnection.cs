@@ -33,17 +33,6 @@
 
         public Task StartAsync()
         {
-            if (_protocol.ResponseOnConnection != null)
-            {
-                var result = this.SendOnConnectionResponse();
-
-                if (result == PipelineResult.StopAndDisconnect)
-                {
-                    this.Disconnect();
-                    return Task.CompletedTask;
-                }
-            }
-
             var pipe = new Pipe();
 
             var writer = FillPipeAsync(pipe.Writer);
@@ -127,36 +116,6 @@
             }
 
             this.OnDisconnect?.Invoke(this, new ConnectionEventArgs(this));
-        }
-
-        private PipelineResult SendOnConnectionResponse()
-        {
-            var result = PipelineResult.Continue;
-
-            foreach (var message in _protocol.ResponseOnConnection)
-            {
-                var delay = message.ResponseDelay;
-                delay = delay < MessagePipeline.MaximumResponseDelay ? delay : MessagePipeline.MaximumResponseDelay;
-                delay = delay > MessagePipeline.MinimumResponseDelay ? delay : MessagePipeline.MinimumResponseDelay;
-
-                if (delay > 0)
-                {
-                    Task.Delay(delay);
-                }
-
-                if (message.Message?.Length > 0)
-                {
-                    _socket.Send(message.Message, SocketFlags.None);
-                }
-
-                if (message.TerminateConnection)
-                {
-                    result = PipelineResult.StopAndDisconnect;
-                    break;
-                }
-            }
-
-            return result;
         }
     }
 }

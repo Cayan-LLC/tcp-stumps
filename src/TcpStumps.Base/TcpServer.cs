@@ -72,6 +72,15 @@
                     var protocol = _protocolFactory.CreateProtocol();
                     var connection = new ClientConnection(protocol, _pipeline, acceptSocket);
                     _ = HandleConnectionAsync(connection);
+
+                    if (protocol.ResponseOnConnection != null)
+                    {
+                        var result = this.SendResponse(connection, protocol.ResponseOnConnection);
+                        if (result == PipelineResult.StopAndDisconnect)
+                        {
+                            connection.Disconnect();
+                        } 
+                    }
                 }
             }
             catch (SocketException) when (!_unbinding)
@@ -87,6 +96,41 @@
             connection.OnDisconnect += (o, e) => this.OnClientDisconnect?.Invoke(o, e);
 
             await task;
+        }
+
+        private PipelineResult SendResponse(ClientConnection connection, TcpResponse response)
+        {
+            var result = PipelineResult.Continue;
+
+            if (connection == null || response == null)
+            {
+                return result;
+            }
+
+            foreach (var message in response)
+            {
+                var delay = message.ResponseDelay;
+                delay = delay < MessagePipeline.MaximumResponseDelay ? delay : MessagePipeline.MaximumResponseDelay;
+                delay = delay > MessagePipeline.MinimumResponseDelay ? delay : MessagePipeline.MinimumResponseDelay;
+
+                if (delay > 0)
+                {
+                    Task.WaitAll(Task.Delay(delay));
+                }
+
+                if (message.Message?.Length > 0)
+                {
+                    Task.WaitAll(connection.SendAsync(message.Message));
+                }
+
+                if (message.TerminateConnection)
+                {
+                    result = PipelineResult.StopAndDisconnect;
+                    break;
+                }
+            }
+
+            return result;
         }
 
         public void Dispose()
