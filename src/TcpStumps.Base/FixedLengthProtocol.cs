@@ -7,15 +7,23 @@
     {
         private readonly int _messageLength;
 
-        public FixedLengthProtocol(TcpResponse defaultResponse, int messageLength)
+        public FixedLengthProtocol(TcpResponse defaultResponse, TcpResponse responseOnConnection, int messageLength)
         {
             this.DefaultResponse = defaultResponse ?? throw new ArgumentNullException(nameof(defaultResponse));
+            this.ResponseOnConnection = responseOnConnection;
+
             _messageLength = messageLength > 0 ? messageLength : throw new ArgumentOutOfRangeException(nameof(messageLength));
         }
 
         public TcpResponse DefaultResponse
         {
             get;
+        }
+
+        public TcpResponse ResponseOnConnection
+        {
+            get;
+            set;
         }
 
         public ProtocolProcessingBehavior ProcessBufferForMessage(IConnection connection, IMessagePipeline pipeline, ref ReadOnlySequence<byte> buffer)

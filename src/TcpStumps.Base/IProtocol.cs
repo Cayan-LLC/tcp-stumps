@@ -9,6 +9,12 @@
             get;
         }
 
+        TcpResponse ResponseOnConnection
+        {
+            get;
+            set;
+        }
+
         ProtocolProcessingBehavior ProcessBufferForMessage(IConnection connection, IMessagePipeline pipeline, ref ReadOnlySequence<byte> bufferWrapper);
     }
 }

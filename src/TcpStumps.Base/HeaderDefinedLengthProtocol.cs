@@ -17,9 +17,11 @@
         private int _currentMessageLength;
         private ProtocolState _currentState;
 
-        public HeaderDefinedLengthProtocol(TcpResponse defaultResponse, int headerLength, MessageLengthCalculator lengthCalculator)
+        public HeaderDefinedLengthProtocol(TcpResponse defaultResponse, TcpResponse responseOnConnection, int headerLength, MessageLengthCalculator lengthCalculator)
         {
             this.DefaultResponse = defaultResponse ?? throw new ArgumentNullException(nameof(defaultResponse));
+            this.ResponseOnConnection = responseOnConnection;
+
             _headerLength = headerLength > 0 ? headerLength : throw new ArgumentOutOfRangeException(nameof(headerLength));
             _lengthCalculator = _lengthCalculator ?? throw new ArgumentNullException(nameof(lengthCalculator));
         }
@@ -27,6 +29,12 @@
         public TcpResponse DefaultResponse
         {
             get;
+        }
+
+        public TcpResponse ResponseOnConnection
+        {
+            get;
+            set;
         }
 
         public ProtocolProcessingBehavior ProcessBufferForMessage(IConnection connection, IMessagePipeline pipeline, ref ReadOnlySequence<byte> buffer)

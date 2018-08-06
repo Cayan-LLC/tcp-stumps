@@ -28,6 +28,12 @@
             set => _messageLength = value > 0 ? value : throw new ArgumentOutOfRangeException(nameof(value));
         }
 
+        public TcpResponse ResponseOnConnection
+        {
+            get;
+            set;
+        }
+
         public IProtocol CreateProtocol()
         {
             if (_messageLength < 1)
@@ -35,7 +41,7 @@
                 throw new InvalidOperationException();
             }
 
-            return new FixedLengthProtocol(_defaultResponse, _messageLength);
+            return new FixedLengthProtocol(_defaultResponse, this.ResponseOnConnection, _messageLength);
         }
     }
 }

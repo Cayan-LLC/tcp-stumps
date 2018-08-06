@@ -5,8 +5,8 @@
 
     internal class MessagePipeline : IMessagePipeline, IMessagePipelineInternal
     {
-        private const int MaximumResponseDelay = 120000;
-        private const int MinimumResponseDelay = 0;
+        public const int MaximumResponseDelay = 120000;
+        public const int MinimumResponseDelay = 0;
 
         private List<IMessageHandler> _handlers = new List<IMessageHandler>();
 

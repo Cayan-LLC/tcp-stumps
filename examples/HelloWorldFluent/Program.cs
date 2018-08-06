@@ -34,6 +34,13 @@
                 ).ReturnsByDefault()
                     .TheMessage("I don't understand.  (Choose \"animal\", \"sing\", \"noop\" or \"quit\")\r\n".FromAsciiString());
 
+            var onConnectionResponse = new TcpResponse
+            {
+                new TcpMessage { Message = "Welcome to TCP-Stumps!\r\n".FromAsciiString() }
+            };
+
+            server.Protocol.ResponseOnConnection = onConnectionResponse;
+
             // *************************************************
             // STEP 2: CREATE SOME STUMPS
             // *************************************************

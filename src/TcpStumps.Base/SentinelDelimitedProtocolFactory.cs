@@ -22,6 +22,12 @@
             set => _defaultResponse = value ?? throw new ArgumentNullException(nameof(value));
         }
 
+        public TcpResponse ResponseOnConnection
+        {
+            get;
+            set;
+        }
+
         public byte[] SentinelValues
         {
             get => _sentinels;
@@ -41,7 +47,7 @@
                 throw new InvalidOperationException();
             }
 
-            var protocol = new SentinelDelimitedProtocol(_defaultResponse, this.ReadPastSentinelLength, _sentinels);
+            var protocol = new SentinelDelimitedProtocol(_defaultResponse, this.ResponseOnConnection, this.ReadPastSentinelLength, _sentinels);
             return protocol;
         }
     }

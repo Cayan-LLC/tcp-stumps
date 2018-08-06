@@ -35,6 +35,12 @@
             set => _lengthCalculator = value ?? throw new ArgumentNullException(nameof(value));
         }
 
+        public TcpResponse ResponseOnConnection
+        {
+            get;
+            set;
+        }
+
         public IProtocol CreateProtocol()
         {
             if (_headerLength < 1 || _lengthCalculator == null)
@@ -42,7 +48,7 @@
                 throw new InvalidOperationException();
             }
 
-            var protocol = new HeaderDefinedLengthProtocol(_defaultResponse, this.HeaderLength, this.LengthCalculator);
+            var protocol = new HeaderDefinedLengthProtocol(_defaultResponse, this.ResponseOnConnection, this.HeaderLength, this.LengthCalculator);
             return protocol;
         }
     }

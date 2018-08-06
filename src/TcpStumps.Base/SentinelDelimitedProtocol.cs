@@ -8,9 +8,11 @@
         private readonly byte[] _sentinels;
         private int _readPastLength;
 
-        public SentinelDelimitedProtocol(TcpResponse defaultResponse, int readPastLength, params byte[] sentinels)
+        public SentinelDelimitedProtocol(TcpResponse defaultResponse, TcpResponse responseOnConnection, int readPastLength, params byte[] sentinels)
         {
             this.DefaultResponse = defaultResponse ?? throw new ArgumentNullException(nameof(defaultResponse));
+            this.ResponseOnConnection = responseOnConnection;
+
             _sentinels = sentinels ?? throw new ArgumentNullException(nameof(sentinels));
             _readPastLength = readPastLength;
         }
@@ -18,6 +20,12 @@
         public TcpResponse DefaultResponse
         {
             get;
+        }
+
+        public TcpResponse ResponseOnConnection
+        {
+            get;
+            set;
         }
 
         public ProtocolProcessingBehavior ProcessBufferForMessage(IConnection connection, IMessagePipeline pipeline, ref ReadOnlySequence<byte> buffer)

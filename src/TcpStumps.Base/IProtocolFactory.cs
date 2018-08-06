@@ -8,6 +8,12 @@
             set;
         }
 
+        TcpResponse ResponseOnConnection
+        {
+            get;
+            set;
+        }
+
         IProtocol CreateProtocol();
     }
 }

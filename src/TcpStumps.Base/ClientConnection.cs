@@ -26,6 +26,11 @@
             get;
         } = Guid.NewGuid();
 
+        public void Disconnect()
+        {
+            _socket?.Close();
+        }
+
         public Task StartAsync()
         {
             var pipe = new Pipe();
