@@ -33,6 +33,16 @@
             return responseFactory;
         }
         
+        public static IStumpResponseFactory Nothing(this IStumpResponseFactory responseFactory)
+        {
+            responseFactory.Add(new TcpResponse
+            {
+                new TcpMessage()
+            });
+
+            return responseFactory;
+        }
+
         public static IStumpResponseFactory TheDelayedMessage(this IStumpResponseFactory responseFactory, byte[] message, int delayTime)
         {
             responseFactory.Add(new TcpResponse

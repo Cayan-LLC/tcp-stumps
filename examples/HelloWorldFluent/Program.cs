@@ -32,7 +32,7 @@
                     readPastSentinelLength: 1,
                     sentinels: 13
                 ).ReturnsByDefault()
-                    .TheMessage("I don't understand.  (Choose \"animal\", \"sing\", or \"quit\")\r\n".FromAsciiString());
+                    .TheMessage("I don't understand.  (Choose \"animal\", \"sing\", \"noop\" or \"quit\")\r\n".FromAsciiString());
 
             // *************************************************
             // STEP 2: CREATE SOME STUMPS
@@ -60,6 +60,11 @@
                         delayTime: 2000)
                     .TheMessage("Like a diamond in the sky.\r\n".FromAsciiString())
                     .TheMessage("... you get the idea.\r\n".FromAsciiString());
+
+            // This one doesn't do anything at all.
+            server.HandlesRequest()
+                .WhenMessageContainsBytes("noop".FromAsciiString())
+                .RespondWith().Nothing();
 
             // Easy to drop the connection when a user calls "quit"
             server.HandlesRequest()
