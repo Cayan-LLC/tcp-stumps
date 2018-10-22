@@ -6,11 +6,11 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("TcpStumps.Base")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("TCP-Stumps Runtime")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("TcpStumps.Base")]
-[assembly: AssemblyCopyright("Copyright ©  2018")]
+[assembly: AssemblyCompany("Cayan, LLC")]
+[assembly: AssemblyProduct("TCP-Stumps")]
+[assembly: AssemblyCopyright("Copyright © 2018 Cayan, LLC")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
