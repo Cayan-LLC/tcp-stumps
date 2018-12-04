@@ -119,6 +119,7 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
+    <None Include="TcpStumps.Base.nuspec" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="BaseResources.resx">
