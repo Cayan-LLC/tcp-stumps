@@ -23,7 +23,7 @@
             this.ResponseOnConnection = responseOnConnection;
 
             _headerLength = headerLength > 0 ? headerLength : throw new ArgumentOutOfRangeException(nameof(headerLength));
-            _lengthCalculator = _lengthCalculator ?? throw new ArgumentNullException(nameof(lengthCalculator));
+            _lengthCalculator = lengthCalculator ?? throw new ArgumentNullException(nameof(lengthCalculator));
         }
 
         public TcpResponse DefaultResponse
