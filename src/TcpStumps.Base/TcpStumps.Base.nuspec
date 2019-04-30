@@ -6,8 +6,8 @@
     <title>TCP Stumps</title>
     <authors>Cayan LLC</authors>
     <owners>Cayan LLC</owners>
-    <licenseUrl>https://github.com/Cayan-LLC/tcp-stumps/blob/master/LICENSE</licenseUrl>
-    <projectUrl>https://github.com/Cayan-LLC/tcp-stumps</projectUrl>
+    <licenseUrl>https://github.com/TSYS-Merchant/tcp-stumps/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/TSYS-Merchant/tcp-stumps</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>A lightweight TCP / Binary protocol server used for creating stub TCP interfaces for testing.</description>
     <copyright>Copyright (C) 2019 Cayan LLC</copyright>
