@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>TcpStumps</id>
-    <version>0.1.0</version>
+    <version>0.2.0</version>
     <title>TCP Stumps</title>
     <authors>Cayan LLC</authors>
     <owners>Cayan LLC</owners>
@@ -10,7 +10,7 @@
     <projectUrl>https://github.com/Cayan-LLC/tcp-stumps</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>A lightweight TCP / Binary protocol server used for creating stub TCP interfaces for testing.</description>
-    <copyright>Copyright (C) 2018 Cayan LLC</copyright>
+    <copyright>Copyright (C) 2019 Cayan LLC</copyright>
     <tags>Stumps TCP</tags>
   </metadata>
 </package>
